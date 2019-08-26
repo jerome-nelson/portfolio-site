@@ -1,0 +1,8 @@
+{
+  "name": "portfolio-repo",
+  "description": "Portfolio website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jerome Nelson <jerome.nelson@betssongroup.com>",
+  "license": "MIT"
+}

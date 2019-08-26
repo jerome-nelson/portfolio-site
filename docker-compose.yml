@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  db:
+    image: mongo:3.4.22-xenial
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: test
+      MONGO_INITDB_ROOT_PASSWORD: test
+      MONGO_INITDB_DATABASE: init_db_test
+    ports: 
+      - "27017-27019:27017-27019"
+    volumes:
+      - "/mongo/db:/data/db"
