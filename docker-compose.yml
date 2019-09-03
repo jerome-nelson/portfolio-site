@@ -8,4 +8,4 @@ services:
     ports: 
       - "27017-27019:27017-27019"
     volumes:
-      - "./db:/tmp/scripts"
+      - "./src/mongo:/tmp/scripts"
