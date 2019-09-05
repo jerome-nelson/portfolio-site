@@ -1,11 +1,19 @@
 version: '3.7'
 services:
+  api:
+    command: "go run main.go -port=${API_PORT}"
+    image: golang:1.6.1-alpine
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    volumes:
+        - "./src/go/src:/go/src"
+    working_dir: "/go/src"
   db:
     image: mongo:3.4.22-xenial
     environment:
-      MONGO_INITDB_ROOT_USERNAME: test
-      MONGO_INITDB_ROOT_PASSWORD: test
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
     ports: 
-      - "27017-27019:27017-27019"
+      - "${DB_PORTS}:27017-27019"
     volumes:
       - "./src/mongo:/tmp/scripts"

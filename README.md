@@ -1,7 +1,8 @@
 ## Source code behind Portfolio Website
 
 ## How to Run
-* `docker-compose up -d`
+* `docker-compose up -d` ()
+* `docker-compose config` (show printed configuration)
 
 ### Purpose of this Website
 * To show technological experience
@@ -20,10 +21,13 @@
 * MongoDB security best practices
     - Create sub-db with user roles
 
-## Docker Services
+## Docker Services (for Development)
+I use an .env file which `docker-compose` 
 
-| Service   | Port  |   |   |   |
-|-----------|-------|---|---|---|
-| MongoDB   | 27017 |   |   |   |
-|           |       |   |   |   |
-|           |       |   |   |   |
+| Service   | ENV PORT | Dev. Port Defaults  |   |   |
+|-----------|----------|---------------------|---|---|
+| MongoDB   | DB_PORTS | 27017 - 27019       |   |   |
+| Go        | API_PORT | 1080                |   |   |
+
+# Go Service
+* `-port=<int>` launch main.go with this argument to start 
