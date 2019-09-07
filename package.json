@@ -1,8 +1,14 @@
 {
   "name": "portfolio-repo",
-  "description": "Portfolio website",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Jerome Nelson <jerome.nelson@betssongroup.com>",
-  "license": "MIT"
+  "private": "true",
+  "author": {
+    "name": "Jerome D. Nelson",
+    "email": "jerome.nelson@betssongroup.com"
+  },
+  "license": "MIT",
+  "description": "Docker-based full stack website",
+  "engines": {
+    "node": ">=10.9.0 <11.0.0"
+  },
+  "version": "1.0.0"
 }

@@ -6,6 +6,7 @@
 
 ### Purpose of this Website
 * To show technological experience
+    - So aside from base technologies will attempt to minimise usage of libraries
 * Improve knowledge of API building
 * Get used to Go-Lang
 
@@ -17,12 +18,12 @@
 * Docker/Docker-Compose for Development
 
 ## TODO
-* Why each technology was picked 
+* Why each technology was picked
 * MongoDB security best practices
     - Create sub-db with user roles
 
 ## Docker Services (for Development)
-I use an .env file which `docker-compose` 
+I use an .env file which `docker-compose`
 
 | Service   | ENV PORT | Dev. Port Defaults  |   |   |
 |-----------|----------|---------------------|---|---|
@@ -30,4 +31,7 @@ I use an .env file which `docker-compose`
 | Go        | API_PORT | 1080                |   |   |
 
 # Go Service
-* `-port=<int>` launch main.go with this argument to start 
+* `-port=<int>` launch main.go with this argument to start
+
+# Reference Points
+* https://docs.mongodb.com/manual/reference/bson-types/

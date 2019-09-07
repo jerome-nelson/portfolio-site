@@ -1,0 +1,16 @@
+{
+  "name": "@portfolio/mongo-validation",
+  "description": "Node.js command-line tool to generate mock-data",
+  "author": {
+    "name": "Jerome D. Nelson",
+    "email": "jerome.nelson@betssongroup.com"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.9.0 <11.0.0"
+  },
+  "version": "1.0.0",
+  "dependencies": {
+    "yargs": "^14.0.0"
+  }
+}
