@@ -14,10 +14,6 @@ I use an .env file which `docker-compose`
 # Reference Points
 * https://docs.mongodb.com/manual/reference/bson-types/
 
-## TODOs
-* Logging Strategy
-* Port allocation
-
 ## MongoDB
 
 ### First Issue - How to add data to MongoDB development container?

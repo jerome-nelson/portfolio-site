@@ -4,6 +4,3 @@ from MongoDB Schema Validator JSON
 
 ## Commands
 * `node index.js generate [file] -m/--multiplier -o/--output`
-
-## TODO
-* Add faker tool to add contextual data

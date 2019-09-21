@@ -1,39 +1,35 @@
 # Portfolio Website
-This repository is the soruce behind my website [link here](https://www.test.test). It's a SoC/Microservice type stack
+This repository is the source behind my website [link here](https://www.test.test). It's a SoC/Microservice type stack
 using different languages to store/process and display data in a React UI.
 
-## Why?
+## Short-term Aims
 * To show technological experience
     - So aside from base technologies will attempt to minimise usage of libraries
 * Improve knowledge of API building
-* Become familiar with Go-Lang
+* Increase familiarity with Go-Lang
+
+
+## Long-term Aims
+* Deploy to AWS Cluster
+* Understanding of Production/Development Infrastructure Lifecycles
+* Load-testing/Metric's Monitoring (This isn't needed but the experience is)
 
 ### Technologies
 
 | Tech.         | Responsibility                                                       |
 |---------------|----------------------------------------------------------------------|
-| MongoDB       | Store long term data persitently                                     |
+| MongoDB       | Store long term data persistently                                     |
 | React         | Thin-client responsible for rendering data                           |
 | Go-Lang       | API layer responsible for aggregation/formattting of data            |
 | Docker        | Used as a service mesh to allow independent linked services          |
 
-To learn more please take at the source code/or the README.md in each `src/<folder>`
+To learn more please take at the source code/or the *.md files in `/docs`
 
 
-### How to Run
-* `docker-compose up -d` ()
+### Useful commands
+* `docker-compose up`
 * `docker-compose config` (show printed configuration)
 
-## TODO
-* Combine Volumes
-* Create network (if needed)
-* Fix Dev MongoSeeding
-    - Auto import of mongoDB
-* Global Configuration
-    - For connecting DB collections with GO API
-* MongoDB security best practices
-    - Create website DB with user roles (done)
-* MongoDB Validation
 
 ## External Tools
-* (https://github.com/vishnubob/wait-for-it)[Wait-for-it] - Shell script used to SEED MongoDev Container
+* [Wait-for-it](https://github.com/vishnubob/wait-for-it) - Shell script used to SEED MongoDev Container

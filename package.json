@@ -1,6 +1,6 @@
 {
   "name": "portfolio-repo",
-  "private": "true",
+  "private": true,
   "author": {
     "name": "Jerome D. Nelson",
     "email": "jerome.nelson@betssongroup.com"

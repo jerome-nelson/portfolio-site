@@ -96,8 +96,6 @@ assert(
   }
 );
 
-// TODO: Replace all data with mocks
-// TODO: until decide how to deal with this
 assert(
   [
     generateMockData({

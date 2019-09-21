@@ -33,8 +33,6 @@ func StartService(serviceType string) ([]string, error) {
 
 }
 
-// TODO: Handle incorrect DB selection
-
 func createMongoConn() (*mongo.Client, error) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -62,13 +60,7 @@ func getData(service string) func(*mongo.Client) ([]string, error) {
 		}
 
 		defer results.Close(ctx)
-
 		res := formatData(results)
-		// TODO: Map Errors
-		// return func(client *mongo.Client, ctx context.Context) (string, error) {
-		// 	return "", errors.New("No service found under request")
-		// }
-
 		return res, nil
 	}
 }

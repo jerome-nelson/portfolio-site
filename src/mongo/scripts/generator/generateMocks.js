@@ -47,7 +47,6 @@ function _generateMockValue(value) {
                 case "int":
                     return Math.floor(Math.random() * Math.pow(2, 32) - 1)
                 case "bool":
-                    // TODO: How to handle this?
                     return true
             }
         }

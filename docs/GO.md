@@ -4,12 +4,6 @@ This service is responsible for connecting to MongoDB instance and exposing data
 
 * `port` - The port to run the server on (required)
 
-### TODO
-* Re-examine Regex for API
-* Make api getData monadic
-* Allow API communication under specific IPs only
-* Error Mapping To map all common expected errors
-* COnvert arrays to result
 
 ## Contract
 * Any calls to `/api/` with incorrect url, return 404
