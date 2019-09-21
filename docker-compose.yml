@@ -1,19 +1,30 @@
 version: '3.7'
 services:
-  api:
-    command: "go run main.go -port=${API_PORT}"
-    image: golang:1.6.1-alpine
-    ports:
-      - "${API_PORT}:${API_PORT}"
+  # api:
+    # command: sh -c "go get && go run main.go -port=${API_PORT}"
+  #   command: "tail -f main.go"
+  #   image: golang:1.6.1-alpine
+  #   ports:
+  #     - "${API_PORT}:${API_PORT}"
+  #   volumes:
+  #       - "./src/go/src:/go/src"
+  #   working_dir: "/go/src"
+  db-seed:
+    command: bash -c "/scripts/wait-for.sh db:${DB_PORT} -- /scripts/generateSeed.sh"
+    depends_on:
+      - db
+    image: node:latest
+    working_dir: "/scripts/generator"
     volumes:
-        - "./src/go/src:/go/src"
-    working_dir: "/go/src"
+      - "./src/mongo/scripts:/scripts"
   db:
     image: mongo:3.4.22-xenial
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
-    ports: 
-      - "${DB_PORTS}:27017-27019"
+      - MONGO_INITDB_ROOT_USERNAME=${DB_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - DB_PASS=${DB_PASS}
+      - DB_USER=${DB_USER}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
     volumes:
-      - "./src/mongo:/tmp/scripts"
+      - "./src/mongo/scripts:/mongo"

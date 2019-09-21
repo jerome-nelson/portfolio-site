@@ -1,5 +1,19 @@
 # Development Infrastructure
 
+## Docker Services (for Development)
+I use an .env file which `docker-compose`
+
+| Service   | ENV PORT | Dev. Port Defaults  |   |   |
+|-----------|----------|---------------------|---|---|
+| MongoDB   | DB_PORTS | 27017 - 27019       |   |   |
+| Go        | API_PORT | 1080                |   |   |
+
+# Go Service
+* `-port=<int>` launch main.go with this argument to start
+
+# Reference Points
+* https://docs.mongodb.com/manual/reference/bson-types/
+
 ## TODOs
 * Logging Strategy
 * Port allocation
