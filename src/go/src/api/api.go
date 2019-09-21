@@ -1,7 +1,13 @@
 package api
 
 import (
-	"fmt"
+	"context"
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 // Areas of responsibility (needed for each service)
@@ -14,21 +20,70 @@ import (
 StartService initiates a Builder which launches specific service
 depending on argument given
 */
-func StartService(service string) {
-	switch service {
-	case "pages":
-		pagesService()
-	default:
-		fmt.Println("call not available")
+func StartService(serviceType string) ([]string, error) {
+	// Connection created or err
+	client, err := createMongoConn()
+	result, dataErr := getData(serviceType)(client)
+
+	if err != nil || dataErr != nil {
+		return make([]string, 1), err
+	}
+
+	return result, nil
+
+}
+
+// TODO: Handle incorrect DB selection
+
+func createMongoConn() (*mongo.Client, error) {
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	settings := options.Client().ApplyURI("mongodb://website_admin:website_pass@localhost:27017/website")
+	client, err := mongo.Connect(ctx, settings)
+	err = client.Ping(ctx, readpref.Primary())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return client, nil
+}
+
+func getData(service string) func(*mongo.Client) ([]string, error) {
+	return func(client *mongo.Client) ([]string, error) {
+		collection := client.Database("website").Collection(service)
+		results, err := collection.Find(context.Background(), bson.D{})
+		ctx := context.Background()
+
+		if err != nil {
+			return nil, err
+		}
+
+		defer results.Close(ctx)
+
+		res := formatData(results)
+		// TODO: Map Errors
+		// return func(client *mongo.Client, ctx context.Context) (string, error) {
+		// 	return "", errors.New("No service found under request")
+		// }
+
+		return res, nil
 	}
 }
 
-func pagesService() {
-	// createMongoConn()
-	fmt.Println("pagesService")
-}
+func formatData(results *mongo.Cursor) []string {
+	list := make([]string, 0, 10)
 
-// func createMongoConn() {
-// 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-// 	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
-// }
+	for results.Next(context.Background()) {
+		result := results.Current
+		// if err != nil {
+		// 	list = append(list, err.Error())
+		// 	// return err
+		// }
+		list = append(list, result.String())
+	}
+
+	return list
+}
