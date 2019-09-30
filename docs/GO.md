@@ -1,25 +1,27 @@
 ## Go-Lang API Service
 
-This service is responsible for connecting to MongoDB instance and exposing data via HTTP endpoints. Responses are returned as JSON (since API is for React Application)
+This simple service is responsible for connecting to MongoDB instance and exposing data.
 
-* `port` - The port to run the server on (required)
+### Responses
+* All Non-GET requests return `405 - Method not allowed`
+* Successful Responses are returned as JSON with `200`
+* Critical Errors cause application to exit
+    - DB Connection errors
+    - Application Startup errors
+* Errors will throw `500` with `Error Occurred` displayed
+    - Actual error will be logged on system
 
 
-## Contract
-* Any calls to `/api/` with incorrect url, return 404
-* All errors are added to `ErrorMsg` as part of payload response
-* Reponse is empty if
-
-## Error Types
-* JSON Error
-* Incorrect Service
-* Regular 404
-
-#### Cases to cover
-1. Handling error (if service doesn't exist)
-2. if port is busy throw exception
+### Application Flags (all required!)
+* `serve`
+ - The port to run the server on (required)
+* `dburl`
+ - Full mongoDB schema url `mongodb://<user>:<pass>@<host>:<port>`
+* `dbname`
+ - Name of MongoDB DB to query
 
 ## TO INVESTIGATE
+* Gorilla Mux (compare solution ~ possibly use for React SSR)
 * Async Messaging
 * Scaling (Replication)
 * Metrics (Prometheus Metric)
@@ -28,3 +30,22 @@ This service is responsible for connecting to MongoDB instance and exposing data
 
 ## External References
 1. [https://godoc.org/go.mongodb.org/mongo-driver/mongo](Go MongoDB API)
+2. [https://blog.golang.org/defer-panic-and-recover](Defer, Panic, Recover)
+3. [https://www.alexedwards.net/blog/organising-database-access](DB Persistence - handling connections)
+
+### TODOS
+
+1. Finish Configuration
+2. Add .env (flags will override) options
+```` go
+// TODO: Add .env config
+options := make(map[config.Configuration] config.Configuration{})
+// Get Config
+if config := config.GetConfig(); config != nil {
+    for env, value := range config {
+        if value != nil {
+            options[env] = value
+	    }
+	}
+}
+````

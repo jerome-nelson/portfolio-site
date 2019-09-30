@@ -3,8 +3,7 @@ This repository is the source behind my website [link here](https://www.test.tes
 using different languages to store/process and display data in a React UI.
 
 ## Short-term Aims
-* To show technological experience
-    - So aside from base technologies will attempt to minimise usage of libraries
+* Knowledge building
 * Improve knowledge of API building
 * Increase familiarity with Go-Lang
 
@@ -16,14 +15,12 @@ using different languages to store/process and display data in a React UI.
 
 ### Technologies
 
-| Tech.         | Responsibility                                                       |
-|---------------|----------------------------------------------------------------------|
-| MongoDB       | Store long term data persistently                                     |
-| React         | Thin-client responsible for rendering data                           |
-| Go-Lang       | API layer responsible for aggregation/formattting of data            |
-| Docker        | Used as a service mesh to allow independent linked services          |
-
-To learn more please take at the source code/or the *.md files in `/docs`
+| Tech.         | Responsibility                                                       |                      |
+|---------------|----------------------------------------------------------------------|----------------------|
+| MongoDB       | Store long term data persistently                                    | [Docs](docs/MONGO.md)|
+| React         | Thin-client responsible for rendering data                           |                      |
+| Go-Lang       | API layer responsible for aggregation/formattting of data            | [Docs](docs/GO.md)   |
+| Docker        | Used as a service mesh to allow independent linked services          |                      |
 
 
 ### Useful commands
