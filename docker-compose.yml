@@ -12,7 +12,7 @@ services:
     ports:
       - "${API_PORT}:${API_PORT}"
     volumes:
-        - "./src/go/src:/go/src"
+        - "./go/src:/go/src"
     working_dir: "/go/src"
   db-seed:
     command: bash -c "/scripts/wait-for.sh db:${DB_PORT} -- /scripts/generateSeed.sh"
@@ -21,7 +21,7 @@ services:
     image: node:latest
     working_dir: "/scripts/generator"
     volumes:
-      - "./src/mongo/scripts:/scripts"
+      - "./mongo/scripts:/scripts"
   db:
     image: mongo:3.4.22-xenial
     environment:
@@ -32,4 +32,4 @@ services:
     ports:
       - "${DB_PORT}:${DB_PORT}"
     volumes:
-      - "./src/mongo/scripts:/mongo"
+      - "./mongo/scripts:/mongo"
