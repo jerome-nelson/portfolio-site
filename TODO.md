@@ -17,6 +17,7 @@
 * Handle Boolean/Arrays/Objects
 
 ### GO TODO
+* Gather all requirements for rewrite
 * Re-examine Regex for API
 * Make api getData monadic
 * Allow API communication under specific IPs only

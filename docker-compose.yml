@@ -1,14 +1,19 @@
 version: '3.7'
 services:
-  # api:
-    # command: sh -c "go get && go run main.go -port=${API_PORT}"
-  #   command: "tail -f main.go"
-  #   image: golang:1.6.1-alpine
-  #   ports:
-  #     - "${API_PORT}:${API_PORT}"
-  #   volumes:
-  #       - "./src/go/src:/go/src"
-  #   working_dir: "/go/src"
+  api:
+    image: golang:latest
+    command: sh -c "go get -d -v ./... && go run main.go -serve=${API_PORT} -dburl=mongodb://${DB_USER}:${DB_PASS}@${DB_HOST} -dbname=${DB_NAME}"
+    environment:
+      - GOROOT=/usr/local/go
+      - GOPATH=/go
+      - DBNAME=${DB_NAME}
+      - DBURL=mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}
+      - SERVE=${API_PORT}
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    volumes:
+        - "./src/go/src:/go/src"
+    working_dir: "/go/src"
   db-seed:
     command: bash -c "/scripts/wait-for.sh db:${DB_PORT} -- /scripts/generateSeed.sh"
     depends_on:

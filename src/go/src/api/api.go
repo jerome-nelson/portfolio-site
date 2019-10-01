@@ -5,7 +5,6 @@ import (
 	"context"
 	"errors"
 	"time"
-	"log"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -35,34 +34,34 @@ type PageDocument struct {
 StartService initiates a Builder which launches specific service
 depending on argument given
 */
-func StartService(opts config.Configuration, serviceType string) ([]*PageDocument, error) {
+func StartService(opts config.Configuration, serviceType string) ([]*PageDocument, int, error) {
 
 	// Case 1: Should throw error and quit application
 	client, err := createMongoConn(opts)
 
 	if err != nil {
-		log.Fatalln("Unable to connect to Mongo Instance: ", err)
+		return nil, 500, errors.New("Unable to connect to Mongo Instance: " + err.Error())
 	}
 
 	getServices, err := availableServices(client, opts)
 
 	if err != nil {
-		return nil, err
+		return nil, 500, err
 	}
 
 	// Case 2: If isValidService is incorrect then return error
 	if (!isValidService(getServices, serviceType)) {
-		return nil, errors.New("Service is not valid")
+		return nil, 404,errors.New("Service is not valid")
 	}
 
 	data, err := getData(opts, client, serviceType)
 
 	// Case 3: Application should continue, but server will throw 404 since no data found
 	if err != nil {
-		return nil, err
+		return nil, 404,err
 	}
 
-	return data, nil
+	return data, 200, nil
 
 }
 
@@ -120,7 +119,7 @@ func createMongoConn(opts config.Configuration) (*mongo.Client, error) {
 	// - Connection fails
 	// - DB cannot be pinged
 	// 2. Load from (.env) -> what if file is not available?
-	settings := options.Client().ApplyURI(opts.DB.URL.String())
+	settings := options.Client().ApplyURI(opts.DB.URL.String() + "/" + opts.DB.Name)
 	client, err := mongo.Connect(ctx, settings)
 	err = client.Ping(ctx, readpref.Primary())
 

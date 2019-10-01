@@ -55,30 +55,31 @@ func handleRequests(options config.Configuration) (func(http.ResponseWriter, *ht
 		}
 
 		possibleService := strings.Split(s.RequestURI, "/")[1]
-		service, err := api.StartService(options, possibleService);
+		service, status, err := api.StartService(options, possibleService);
 
 		if (err == nil) {
-			jsonOutput(r, service)
+			jsonOutput(r, status, service)
 			return
 		}
-		errorOutput(r, err)
+		errorOutput(r, status, err)
 	}
 }
 
 
-func jsonOutput(r http.ResponseWriter, msgObj interface{}) {
+func jsonOutput(r http.ResponseWriter, status int, msgObj interface{}) {
 	// Case 1: Should create JSON response else throw error
 	message, jsonErr := json.Marshal(msgObj)
 	if jsonErr != nil {
-		errorOutput(r, jsonErr)
+		errorOutput(r, 500, jsonErr)
 		return
 	}
+	r.WriteHeader(status)
 	r.Header().Add("Content-Type", "application/json")
 	r.Write(message)
 }
 
-func errorOutput(r http.ResponseWriter, err error) {
+func errorOutput(r http.ResponseWriter, status int, err error) {
 	// Case 1: When error thrown - should output status with correct errorMsg
 	log.Println("Error:", err.Error())
-	http.Error(r, "Error Occurred", 500)
+	http.Error(r, "Error Occurred", status)
 }
