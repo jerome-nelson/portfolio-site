@@ -1,0 +1,1 @@
+go get -d -v ./... && go run main.go -serve=${SERVE} -dburl=${DBURL} -dbname=${DBNAME}

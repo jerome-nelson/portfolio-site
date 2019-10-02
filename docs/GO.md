@@ -36,7 +36,7 @@ This simple service is responsible for connecting to MongoDB instance and exposi
 ### TODOS
 
 1. Finish Configuration
-2. Add .env (flags will override) options
+2. Add .env/environment variable options (flags will override) options
 ```` go
 // TODO: Add .env config
 options := make(map[config.Configuration] config.Configuration{})
@@ -49,3 +49,14 @@ if config := config.GetConfig(); config != nil {
 	}
 }
 ````
+* Gather all requirements for rewrite
+* Re-examine Regex for API
+* Make api getData monadic
+* Allow API communication under specific IPs only
+* Error Mapping To map all common expected errors
+* COnvert arrays to result
+* // TODO: Handle incorrect DB selection
+* 		// TODO: Map Errors
+		// return func(client *mongo.Client, ctx context.Context) (string, error) {
+		// 	return "", errors.New("No service found under request")
+		// }
