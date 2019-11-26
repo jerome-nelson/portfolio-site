@@ -39,4 +39,4 @@ mongo admin --username $MONGO_INITDB_ROOT_USERNAME --password $MONGO_INITDB_ROOT
     }
  });
 "
-mongoimport -d website -u website_admin -p website_pass -c pages --type json --jsonArray backups/import.dev.json
+mongoimport -d website -u website_admin -p website_pass -c pages --type json --jsonArray import.dev.json

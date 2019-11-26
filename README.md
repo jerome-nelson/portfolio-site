@@ -4,6 +4,8 @@ using different languages to store/process and display data in a React UI.
 
 ## How to Install
 
+**Note: runs on Docker Linux Containers only**
+
 Install [Docker](https://www.docker.com/products/docker-desktop). Then create `.env` file in root with similar values to below:
 ```
 API_PORT=<PORT>

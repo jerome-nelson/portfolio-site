@@ -1,5 +1,5 @@
 const generateMockData = require("../generateMocks");
-const assert = require("./util.js");
+const assert = require("./util.js.js");
 
 // Based off - https://docs.mongodb.com/manual/core/schema-validation/ (JSON Schema)
 // TESTS Start here ...

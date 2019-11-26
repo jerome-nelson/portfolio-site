@@ -54,7 +54,6 @@ function init(file, options) {
 
 function _prepareForMongo(data) {
     return JSON.stringify(data);
-    // return stringObj.replace(/\[/, "").replace(/\]/, "").replace(/\}\,/g, "}")
 }
 
 function _saveFile (data, path) {

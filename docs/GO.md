@@ -34,29 +34,9 @@ This simple service is responsible for connecting to MongoDB instance and exposi
 3. [https://www.alexedwards.net/blog/organising-database-access](DB Persistence - handling connections)
 
 ### TODOS
-
-1. Finish Configuration
-2. Add .env/environment variable options (flags will override) options
-```` go
-// TODO: Add .env config
-options := make(map[config.Configuration] config.Configuration{})
-// Get Config
-if config := config.GetConfig(); config != nil {
-    for env, value := range config {
-        if value != nil {
-            options[env] = value
-	    }
-	}
-}
-````
 * Gather all requirements for rewrite
 * Re-examine Regex for API
 * Make api getData monadic
 * Allow API communication under specific IPs only
 * Error Mapping To map all common expected errors
 * COnvert arrays to result
-* // TODO: Handle incorrect DB selection
-* 		// TODO: Map Errors
-		// return func(client *mongo.Client, ctx context.Context) (string, error) {
-		// 	return "", errors.New("No service found under request")
-		// }
